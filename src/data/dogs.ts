@@ -47,13 +47,12 @@ export const allDogs = [
     name: "Poypoy",
     age: "[Adult]", // Changed to Adult based on 2019 timeline
     description: "A resilient survivor.",
-    adopted: true,
-    category: "Adopted",
+    category: "Adults",
     photos: [poypoy, kool, mapua],
     background: "Poypoy was rescued from Lubogan Toril in 2019. His previous owner sought help due to a massive lump on his neck. After being brought to the vet, it was diagnosed as a Lipoma Tumor. He was operated on by Doc Nielsen Donato of the 'Born to Be Wild' GMA TV Program, removing a tumor weighing almost 4 kls. After the surgery, his owner surrendered him as they could no longer care for him.",
     personality: "Incredibly brave and patient despite his medical history.",
     medical: "Fully recovered from Lipoma Tumor surgery. Up to date on all shots.",
-    adoptionDetails: "Already adopted!"
+    adoptionDetails: "Standard adoption fee applies. Home check required."
   },
   {
     id: "maxx",

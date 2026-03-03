@@ -1,9 +1,9 @@
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import DogCard from "@/components/DogCard";
-import { Heart, Home as HomeIcon, Shield, Play } from "lucide-react";
+import { Heart, Home as HomeIcon, Shield, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroDog from "@/assets/hero-dog.png";
+import { useState } from "react";
 import { allDogs } from "@/data/dogs";
 
 const missionCards = [
@@ -13,6 +13,12 @@ const missionCards = [
 ];
 
 const Index = () => {
+  const [currentDogIndex, setCurrentDogIndex] = useState(0);
+  const heroDogs = allDogs.map(dog => dog.image);
+
+  const prevDog = () => setCurrentDogIndex((i) => (i === 0 ? heroDogs.length - 1 : i - 1));
+  const nextDog = () => setCurrentDogIndex((i) => (i === heroDogs.length - 1 ? 0 : i + 1));
+
   return (
     <Layout>
       {/* Hero */}
@@ -38,11 +44,37 @@ const Index = () => {
             {/* Geometric yellow accent */}
             <div className="absolute -right-4 -top-4 h-[110%] w-[90%] bg-secondary/20 geometric-accent-reverse rounded" />
             <div className="absolute -left-4 -bottom-4 h-24 w-24 bg-secondary rotate-12" />
-            <img
-              src={heroDog}
-              alt="Rescue dog"
-              className="relative z-10 w-full max-w-md rounded-lg shadow-2xl object-cover"
-            />
+            <div className="relative z-10 w-full max-w-md">
+              <div className="aspect-square rounded-lg overflow-hidden shadow-2xl border border-border">
+                <img
+                  src={heroDogs[currentDogIndex]}
+                  alt="Rescue dog"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <button
+                onClick={prevDog}
+                className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-colors shadow"
+              >
+                <ChevronLeft className="h-5 w-5 text-foreground" />
+              </button>
+              <button
+                onClick={nextDog}
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-colors shadow"
+              >
+                <ChevronRight className="h-5 w-5 text-foreground" />
+              </button>
+              {/* Dots */}
+              <div className="flex justify-center gap-2 mt-4">
+                {heroDogs.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentDogIndex(i)}
+                    className={`h-2.5 w-2.5 rounded-full transition-colors ${i === currentDogIndex ? "bg-primary" : "bg-border"}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -95,16 +127,19 @@ const Index = () => {
       {/* Video Section */}
       <section className="bg-background py-16">
         <div className="container grid gap-8 md:grid-cols-2 items-center">
-          <div className="aspect-video rounded-lg bg-primary-deepest/10 border-2 border-dashed border-primary/30 flex items-center justify-center">
-            <div className="text-center space-y-2">
-              <Play className="h-16 w-16 text-primary mx-auto" />
-              <p className="text-sm text-muted-foreground">[Video Placeholder]</p>
-            </div>
+          <div className="aspect-video rounded-lg overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/k_fdGuQU_kQ"
+              title="Rescue Story Video"
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
           <div className="space-y-4">
-            <h2 className="font-display text-3xl text-foreground">[Rescue Story Title]</h2>
+            <h2 className="font-display text-3xl text-foreground"> This is Sonia's Home of Rescued Dogs </h2>
             <p className="text-muted-foreground leading-relaxed">
-              [Placeholder text explaining the rescue story. This section will feature an emotional video about the organization's rescue efforts.]
+              Sonia’s Home for Rescued Dogs, also known as the Davao Animal Rescue Volunteers (DARV), is a non-profit animal welfare organization in Davao City founded in 2009 to rescue and care for stray, abandoned, and abused dogs. This organization is devoted to providing a safe shelter, medical care, and daily support for rescued animals through the help of dedicated volunteers and partners. Today, DARV cares for 142 rescued dogs in its permanent shelter in Purok 7, Alambre, Toril, Davao City, strengthening its mission to uphold the dignity, compassion, and protection that every animal deserves.
             </p>
           </div>
         </div>

@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Heart, CalendarHeart, Dog, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { allDogs } from "@/data/dogs";
+
+// Manual imports for where money goes images
 import img1 from "@/assets/where_money_goes/1.jpg";
 import img2 from "@/assets/where_money_goes/2.jpg";
 import img3 from "@/assets/where_money_goes/3.jpg";
@@ -19,13 +21,24 @@ const donationOptions = [
 
 const amounts = ["$10", "$25", "$50", "$100"];
 
-const whereMoneyGoesImages = [img1, img2, img3, img4, img5];
+// Base images array - add new imports here as needed
+const baseImages = [img1, img2, img3, img4, img5];
+
+// Function to generate image objects with order
+const generateWhereMoneyGoesImages = () => {
+  return baseImages.map((src, index) => ({
+    src,
+    order: index + 1,
+    filename: `${index + 1}`
+  }));
+};
 
 const Donate = () => {
   const [showGcashModal, setShowGcashModal] = useState(false);
   const [showDogGallery, setShowDogGallery] = useState(false);
   const [selectedDog, setSelectedDog] = useState(null);
   const [showDogDonationModal, setShowDogDonationModal] = useState(false);
+  const [whereMoneyGoesImages, setWhereMoneyGoesImages] = useState(generateWhereMoneyGoesImages());
 
   const handleOneTimeDonation = () => {
     setShowGcashModal(true);
@@ -122,8 +135,8 @@ const Donate = () => {
             {whereMoneyGoesImages.map((img, i) => (
               <div key={i} className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                 <img 
-                  src={img} 
-                  alt={`Where money goes ${i + 1}`}
+                  src={img.src} 
+                  alt={`Where money goes ${img.filename}`}
                   className="w-full h-48 object-cover"
                 />
               </div>

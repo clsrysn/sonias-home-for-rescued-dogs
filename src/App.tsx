@@ -8,6 +8,7 @@ import Gallery from "./pages/Gallery";
 import Donate from "./pages/Donate";
 import About from "./pages/About";
 import DogProfile from "./pages/DogProfile";
+import SocialMedia from "./pages/SocialMedia";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/dog/:id" element={<DogProfile />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/about" element={<About />} />
+          <Route path="/updates" element={<SocialMedia />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>
