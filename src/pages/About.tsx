@@ -1,9 +1,9 @@
 import Layout from "@/components/layout/Layout";
 import { Heart, Target, Users } from "lucide-react";
 import rescueTeam from "@/assets/rescue-team.jpg";
-import kool from "@/assets/kool.jpg";
-import mapua from "@/assets/mapua.jpg";
-import poypoy from "@/assets/poypoy.jpg";
+import kool from "@/assets/dogs/kool.jpg";
+import mapua from "@/assets/dogs/mapua.jpg";
+import poypoy from "@/assets/dogs/poypoy.jpg";
 
 const milestones = [
   { year: "2009", label: "Founded" },

@@ -1,7 +1,7 @@
-import kool from "@/assets/kool.jpg";
-import mapua from "@/assets/mapua.jpg";
-import poypoy from "@/assets/poypoy.jpg";
-import maxx from "@/assets/maxx.jpg";
+import kool from "@/assets/dogs/kool.jpg";
+import mapua from "@/assets/dogs/mapua.jpg";
+import poypoy from "@/assets/dogs/poypoy.jpg";
+import maxx from "@/assets/dogs/maxx.jpg";
 
 export interface Dog {
   id: string;
