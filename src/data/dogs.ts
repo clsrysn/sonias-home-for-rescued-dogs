@@ -23,9 +23,9 @@ export const allDogs = [
     description: "A sweet and playful pup.",
     category: "Puppies",
     photos: [kool, mapua, poypoy, maxx],
-    background: "Kool was found wandering near a local market. He is a very sweet boy looking for his forever home.",
+    background: "Kool was found near a local market, owned by a vegetable vendor. Kool's former owner mentioned that one of his legs was fractured as he was ran by a taxi cab. They, unfortunately, did not have the funds to get him proper treatment, so they asked Miss Sonia to take him in so he could receive proper medication. It was suggested by the vet that he should have his leg aputated as his white blood cell count was rising, in which he developed an infection. The name Kool was actually derived from the word Pungkol.",
     personality: "High energy, loves to play fetch, and gets along well with other dogs.",
-    medical: "Fully vaccinated and dewormed. Not yet neutered.",
+    medical: "Leg is amputated. Fully vaccinated and dewormed. Not yet neutered.",
     adoptionDetails: "Standard adoption fee applies. Home check required."
   },
   {
