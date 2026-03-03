@@ -30,7 +30,7 @@ const About = () => {
       {/* Banner */}
       <section className="bg-primary-deepest py-14">
         <div className="container text-center">
-          <h1 className="font-display text-4xl text-primary-foreground">[About Us]</h1>
+          <h1 className="font-display text-4xl text-primary-foreground">About SHARE</h1>
         </div>
       </section>
 
@@ -45,11 +45,12 @@ const About = () => {
             className="rounded-lg shadow-lg w-full object-cover aspect-[4/3]"
           />
           <div className="space-y-4">
-            <h2 className="font-display text-3xl text-foreground">[Our Story]</h2>
+            <h2 className="font-display text-3xl text-foreground">Sonia's Home for Animal Rescue</h2>
             <p className="text-muted-foreground leading-relaxed">
-              [Story placeholder paragraph 1 – How the organization was founded and its early days of rescuing dogs.]
-            </p> {/* TO DO */}
+              Sonia's Home for Animal Rescue (SHARE), or formerly known as Davao Animal Rescue Volunteers (DARV), was founded by Sonia Geli in 2009. The shelter began as a simple act of kindness—an act aiming to help find new homes for stray and abandoned dogs. What started as a small gesture, helping a small community, turned to a sustainable advocacy, bringing communities sharing the same values and advocacies together—united by the desire on building a safer home for stray, abandoned, and abused animals. Through years of commitment and volunteer collaboration, DARV is finally recognized as a permanent animal shelter in 2023. Located in Purok 7, Alambre, Toril, Davao City, the shelter stands 6,000-square meter lot, donated by the founder's husband. 
+            </p>
             <p className="text-muted-foreground leading-relaxed">
+              Since its founding, the DARV/SHARE has rescued and cared for over 3,000 dogs. As of 2025, 142 rescue dogs are cohabiting in the shelter. To ensure its mission and accountability, the shelter is registered with the Securities and Exchange Commission (SEC).
               [Story placeholder paragraph 2 – Growth, achievements, and current operations.]
             </p> {/* TO DO */}
           </div>
@@ -59,7 +60,7 @@ const About = () => {
       {/* Timeline */}
       <section className="bg-muted py-16">
         <div className="container">
-          <h2 className="font-display text-3xl text-center text-foreground mb-10">[Our Journey]</h2>
+          <h2 className="font-display text-3xl text-center text-foreground mb-10">SHARE's Journey]</h2>
           <div className="relative">
             {/* Line */}
             <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-primary/20 -translate-y-1/2" />

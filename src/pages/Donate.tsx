@@ -185,7 +185,7 @@ const Donate = () => {
             </div>
             <div className="space-y-2">
               <p className="font-semibold">Phone Number:</p>
-              <p className="text-lg text-primary">+63 912 345 6789</p>
+              <p className="text-lg text-primary">+63 917 887 6808</p>
             </div>
             <p className="text-sm text-muted-foreground">Scan the QR code or send payment to the number above</p>
           </div>

@@ -26,11 +26,10 @@ export const allDogs: Dog[] = [
     name: "Kool", 
     age: "[Adult]",
     description: "A sweet and playful pup.",
-    category: "Adults",
-    adopted: false,
+    category: "Puppies",
     background: "Kool was found wandering near a local market. He is a very sweet boy looking for his forever home.",
     personality: "High energy, loves to play fetch, and gets along well with other dogs.",
-    medical: "Fully vaccinated and dewormed. Not yet neutered.",
+    medical: "Leg is amputated. Fully vaccinated and dewormed. Not yet neutered.",
     adoptionDetails: "Standard adoption fee applies. Home check required."
   },
   {
