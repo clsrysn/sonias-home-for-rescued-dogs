@@ -1,6 +1,6 @@
 import Layout from "@/components/layout/Layout";
 import { Heart, Target, Users } from "lucide-react";
-import rescueTeam from "@/assets/rescue-team.png";
+import rescueTeam from "@/assets/rescue-team.jpg";
 import kool from "@/assets/kool.jpg";
 import mapua from "@/assets/mapua.jpg";
 import poypoy from "@/assets/poypoy.jpg";
