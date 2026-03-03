@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import DogCard from "@/components/DogCard";
 import { Heart, Home as HomeIcon, Shield, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { allDogs } from "@/data/dogs";
 import logo from "@/assets/logo.png";
 
@@ -16,7 +16,28 @@ const missionCards = [
 const Index = () => {
   const [currentDogIndex, setCurrentDogIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const heroDogs = allDogs.map(dog => dog.image);
+  const [featuredDogs, setFeaturedDogs] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(0); // Force re-render when new dogs added
+
+  // Randomly select 3 dogs for featured section
+  useEffect(() => {
+    const shuffled = [...allDogs].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 3);
+    setFeaturedDogs(selected);
+  }, []);
+
+  // Hero section uses ALL dogs
+  const heroDogs = allDogs;
+
+  // Refresh hero dogs when component updates (for new dogs like Buddy)
+  useEffect(() => {
+    // This ensures new dogs added to data appear in hero section
+  const timer = setTimeout(() => {
+      setHeroDogs([...allDogs]);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [allDogs]);
 
   const prevDog = () => {
     if (isAnimating) return;
@@ -61,9 +82,13 @@ const Index = () => {
               <div className="aspect-square rounded-lg overflow-hidden shadow-2xl border border-border transition-opacity duration-300" 
                    style={{ opacity: isAnimating ? 0.7 : 1 }}>
                 <img
-                  src={heroDogs[currentDogIndex]}
-                  alt="Rescue dog"
+                  src={heroDogs[currentDogIndex].image}
+                  alt={heroDogs[currentDogIndex].name}
                   className="w-full h-full object-cover"
+                  style={{ 
+                    objectFit: 'contain',
+                    backgroundColor: '#f3f4f5'
+                  }}
                 />
               </div>
               <button
@@ -126,13 +151,13 @@ const Index = () => {
 
       {/* Featured Dogs */}
       <section className="bg-muted py-16">
-        <div className="container">
-          <h2 className="font-display text-3xl text-center text-foreground mb-10">
+        <div className="container text-center">
+          <h2 className="font-display text-3xl text-foreground mb-10">
             Featured Dogs
           </h2>
-          <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
-            {allDogs.map((dog, i) => (
-              <div key={i} className="min-w-[280px] max-w-[320px] snap-start flex-shrink-0">
+          <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide justify-center">
+            {featuredDogs.map((dog, i) => (
+              <div key={dog.id} className="min-w-[320px] max-w-[400px] snap-start flex-shrink-0">
                 <DogCard {...dog} />
               </div>
             ))}

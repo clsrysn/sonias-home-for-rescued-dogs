@@ -31,4 +31,4 @@ npm install
 npm run dev
 ```
 
-- Open the local URL provided in your terminal (typically `http://localhost:5173/`) in your web browser to see the website in action. Any changes you make to the code will automatically reflect in the browser.
+- Open the local URL provided in your terminal in your web browser to see the website in action. Any changes you make to the code will automatically reflect in the browser.
