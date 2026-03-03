@@ -30,7 +30,7 @@ const About = () => {
       {/* Banner */}
       <section className="bg-primary-deepest py-14">
         <div className="container text-center">
-          <h1 className="font-display text-4xl text-primary-foreground">[About Us]</h1>
+          <h1 className="font-display text-4xl text-primary-foreground">About SHARE</h1>
         </div>
       </section>
 
