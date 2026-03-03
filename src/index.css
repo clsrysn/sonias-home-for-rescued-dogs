@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Ateneo Blue Main #2F3590 */
+    --primary: 237 51% 38%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Ateneo Blue 2 #1611B1 */
+    --primary-dark: 243 82% 38%;
+    --primary-dark-foreground: 0 0% 100%;
+
+    /* Ateneo Blue 3 #040354 */
+    --primary-deepest: 241 93% 17%;
+    --primary-deepest-foreground: 0 0% 100%;
+
+    /* Yellow Main #FDF036 */
+    --secondary: 55 98% 60%;
+    --secondary-foreground: 0 0% 0%;
+
+    /* Yellow 2 #FFDB58 */
+    --secondary-warm: 46 100% 67%;
+    --secondary-warm-foreground: 0 0% 0%;
+
+    /* Yellow 3 #FCCA27 */
+    --secondary-deep: 43 97% 57%;
+    --secondary-deep-foreground: 0 0% 0%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 55 98% 60%;
+    --accent-foreground: 0 0% 0%;
+
+    /* Red CTA #E9222E */
+    --destructive: 356 81% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Green Adopted #19A554 */
+    --success: 149 73% 37%;
+    --success-foreground: 0 0% 100%;
+
+    /* Picton Blue #1EA6EC */
+    --highlight: 201 85% 52%;
+    --highlight-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 237 51% 38%;
+    --radius: 0.375rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --font-display: 'DM Serif Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  .dark {
+    --background: 241 93% 17%;
+    --foreground: 0 0% 100%;
+    --card: 237 51% 38%;
+    --card-foreground: 0 0% 100%;
+    --popover: 241 93% 17%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 55 98% 60%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 237 51% 38%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 237 30% 25%;
+    --muted-foreground: 220 14% 70%;
+    --accent: 55 98% 60%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 356 81% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 237 30% 25%;
+    --input: 237 30% 25%;
+    --ring: 55 98% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .section-divider {
+    @apply h-1 w-full;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--secondary)) 0%,
+      hsl(var(--secondary-warm)) 50%,
+      hsl(var(--secondary-deep)) 100%
+    );
+  }
+
+  .geometric-accent {
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+  }
+
+  .geometric-accent-reverse {
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
