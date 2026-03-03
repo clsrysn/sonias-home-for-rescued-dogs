@@ -1,6 +1,6 @@
 # Sonias Home for Rescued Dogs
 
-Sonia's Home is a website built to help the local community find and adopt dogs that are in need of a loving home. The website is built using Lovable, utilizing the Vite, TypeScript, React, shadcn-ui, and Tailwind CSS stack.
+Sonia's Home is a website built to help the local community find and adopt dogs that are in need of a loving home. The website is built using Vite, TypeScript, React, shadcn-ui, and Tailwind CSS stack.
 
 ## How can I edit this code?
 
