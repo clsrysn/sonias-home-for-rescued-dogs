@@ -6,13 +6,6 @@ import { Heart, CalendarHeart, Dog, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { allDogs } from "@/data/dogs";
 
-// Manual imports for where money goes images
-import img1 from "@/assets/where_money_goes/1.jpg";
-import img2 from "@/assets/where_money_goes/2.jpg";
-import img3 from "@/assets/where_money_goes/3.jpg";
-import img4 from "@/assets/where_money_goes/4.jpg";
-import img5 from "@/assets/where_money_goes/5.jpg";
-
 const donationOptions = [
   { icon: Heart, title: "[One-Time Donation]", description: "[Description placeholder for one-time donation option.]" }, // TO DO
   { icon: CalendarHeart, title: "[Monthly Support]", description: "[Description placeholder for recurring monthly support.]" }, // TO DO
@@ -21,24 +14,12 @@ const donationOptions = [
 
 const amounts = ["$10", "$25", "$50", "$100"];
 
-// Base images array - add new imports here as needed
-const baseImages = [img1, img2, img3, img4, img5];
-
-// Function to generate image objects with order
-const generateWhereMoneyGoesImages = () => {
-  return baseImages.map((src, index) => ({
-    src,
-    order: index + 1,
-    filename: `${index + 1}`
-  }));
-};
-
 const Donate = () => {
   const [showGcashModal, setShowGcashModal] = useState(false);
   const [showDogGallery, setShowDogGallery] = useState(false);
   const [selectedDog, setSelectedDog] = useState(null);
   const [showDogDonationModal, setShowDogDonationModal] = useState(false);
-  const [whereMoneyGoesImages, setWhereMoneyGoesImages] = useState(generateWhereMoneyGoesImages());
+  const [whereMoneyGoesImages, setWhereMoneyGoesImages] = useState([]);
   const [expandedImage, setExpandedImage] = useState(null);
 
   const handleOneTimeDonation = () => {
@@ -66,6 +47,35 @@ const Donate = () => {
   const closeExpandedImage = () => {
     setExpandedImage(null);
   };
+
+  // Load images dynamically from where money goes folder
+  useEffect(() => {
+    const loadWhereMoneyGoesImages = async () => {
+      try {
+        const imageModules = import.meta.glob("@/assets/where_money_goes/*.{jpg,jpeg,png,gif,webp,svg}");
+        const images = [];
+        
+        for (const path in imageModules) {
+          const module = await imageModules[path]();
+          images.push({
+            src: module.default as string,
+            filename: path.split('/').pop().split('.')[0]
+          });
+        }
+        
+        // Sort images alphabetically by filename for consistency
+        images.sort((a, b) => {
+          return a.filename.localeCompare(b.filename);
+        });
+        
+        setWhereMoneyGoesImages(images);
+      } catch (error) {
+        console.error('Error loading where money goes images:', error);
+      }
+    };
+    
+    loadWhereMoneyGoesImages();
+  }, []);
 
   return (
     <>
