@@ -14,9 +14,9 @@ import img4 from "@/assets/where_money_goes/4.jpg";
 import img5 from "@/assets/where_money_goes/5.jpg";
 
 const donationOptions = [
-  { icon: Heart, title: "[One-Time Donation]", description: "[Description placeholder for one-time donation option.]" },
-  { icon: CalendarHeart, title: "[Monthly Support]", description: "[Description placeholder for recurring monthly support.]" },
-  { icon: Dog, title: "[Sponsor a Dog]", description: "[Description placeholder for sponsoring a specific rescue dog.]" },
+  { icon: Heart, title: "[One-Time Donation]", description: "[Description placeholder for one-time donation option.]" }, // TO DO
+  { icon: CalendarHeart, title: "[Monthly Support]", description: "[Description placeholder for recurring monthly support.]" }, // TO DO
+  { icon: Dog, title: "[Sponsor a Dog]", description: "[Description placeholder for sponsoring a specific rescue dog.]" }, // TO DO
 ];
 
 const amounts = ["$10", "$25", "$50", "$100"];
@@ -39,6 +39,7 @@ const Donate = () => {
   const [selectedDog, setSelectedDog] = useState(null);
   const [showDogDonationModal, setShowDogDonationModal] = useState(false);
   const [whereMoneyGoesImages, setWhereMoneyGoesImages] = useState(generateWhereMoneyGoesImages());
+  const [expandedImage, setExpandedImage] = useState(null);
 
   const handleOneTimeDonation = () => {
     setShowGcashModal(true);
@@ -58,6 +59,14 @@ const Donate = () => {
     setShowDogDonationModal(true);
   };
 
+  const handleImageClick = (img) => {
+    setExpandedImage(img);
+  };
+
+  const closeExpandedImage = () => {
+    setExpandedImage(null);
+  };
+
   return (
     <>
     <Layout>
@@ -67,7 +76,7 @@ const Donate = () => {
           <h1 className="font-display text-4xl text-primary-foreground">[Make a Difference]</h1>
           <p className="text-primary-foreground/70 max-w-lg mx-auto">
             [Emotional statement placeholder – Your support helps us rescue, rehabilitate, and rehome dogs in need.]
-          </p>
+          </p> {/* TO DO */}
         </div>
       </section>
 
@@ -133,11 +142,11 @@ const Donate = () => {
           <h2 className="font-display text-3xl text-foreground mb-10">[Where Your Money Goes]</h2>
           <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-5">
             {whereMoneyGoesImages.map((img, i) => (
-              <div key={i} className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+              <div key={i} className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer" onClick={() => handleImageClick(img)}>
                 <img 
                   src={img.src} 
                   alt={`Where money goes ${img.filename}`}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover hover:scale-105 transition-transform duration-200"
                 />
               </div>
             ))}
@@ -243,6 +252,25 @@ const Donate = () => {
               <p className="text-sm text-muted-foreground">Your donation will help {selectedDog.name} get the care they need</p>
             </div>
           </div>
+        </div>
+      </div>
+    )}
+
+    {/* Expanded Image Modal */}
+    {expandedImage && (
+      <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4" onClick={closeExpandedImage}>
+        <div className="relative max-w-4xl max-h-[90vh]">
+          <img
+            src={expandedImage.src}
+            alt={`Expanded image ${expandedImage.filename}`}
+            className="max-w-full max-h-full object-contain rounded-lg"
+          />
+          <button
+            onClick={closeExpandedImage}
+            className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors"
+          >
+            <X className="h-5 w-5 text-gray-800" />
+          </button>
         </div>
       </div>
     )}

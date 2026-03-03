@@ -19,9 +19,9 @@ const milestones = [
 // ];
 
 const values = [
-  { icon: Heart, title: "[Compassion]", text: "[Value description placeholder]" },
-  { icon: Target, title: "[Dedication]", text: "[Value description placeholder]" },
-  { icon: Users, title: "[Community]", text: "[Value description placeholder]" },
+  { icon: Heart, title: "[Compassion]", text: "[Value description placeholder]" }, // TO DO
+  { icon: Target, title: "[Dedication]", text: "[Value description placeholder]" }, // TO DO
+  { icon: Users, title: "[Community]", text: "[Value description placeholder]" }, // TO DO
 ];
 
 const About = () => {
@@ -48,10 +48,10 @@ const About = () => {
             <h2 className="font-display text-3xl text-foreground">[Our Story]</h2>
             <p className="text-muted-foreground leading-relaxed">
               [Story placeholder paragraph 1 – How the organization was founded and its early days of rescuing dogs.]
-            </p>
+            </p> {/* TO DO */}
             <p className="text-muted-foreground leading-relaxed">
               [Story placeholder paragraph 2 – Growth, achievements, and current operations.]
-            </p>
+            </p> {/* TO DO */}
           </div>
         </div>
       </section>

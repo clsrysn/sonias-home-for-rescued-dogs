@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Heart, Facebook, Instagram, Mail } from "lucide-react";
+import { Facebook, Instagram, Mail } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -10,14 +11,16 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded bg-secondary">
-                <Heart className="h-4 w-4 text-primary-deepest" fill="currentColor" />
-              </div>
+              <img 
+                src={logo} 
+                alt="SHARE Logo" 
+                className="h-8 w-8 object-contain"
+              />
               <span className="font-display text-lg">SHARE</span>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
               [Mission statement placeholder – Rescuing dogs, restoring hope, one paw at a time.]
-            </p>
+            </p> {/* TO DO */}
           </div>
 
           {/* Quick Links */}
@@ -82,7 +85,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-10 border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/50">
-          © 2026 SHARE. All rights reserved. [Legal placeholder]
+          © 2026 SHARE. All rights reserved. [Legal placeholder] {/* TO DO */}
         </div>
       </div>
     </footer>

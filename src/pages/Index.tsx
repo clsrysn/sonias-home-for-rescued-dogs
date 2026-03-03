@@ -5,19 +5,32 @@ import { Heart, Home as HomeIcon, Shield, Play, ChevronLeft, ChevronRight } from
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { allDogs } from "@/data/dogs";
+import logo from "@/assets/logo.png";
 
 const missionCards = [
-  { icon: Heart, title: "[Rescue]", text: "[Mission card text placeholder]" },
-  { icon: HomeIcon, title: "[Rehabilitate]", text: "[Mission card text placeholder]" },
-  { icon: Shield, title: "[Rehome]", text: "[Mission card text placeholder]" },
+  { icon: Heart, title: "[Rescue]", text: "[Mission card text placeholder]" }, // TO DO
+  { icon: HomeIcon, title: "[Rehabilitate]", text: "[Mission card text placeholder]" }, // TO DO
+  { icon: Shield, title: "[Rehome]", text: "[Mission card text placeholder]" }, // TO DO
 ];
 
 const Index = () => {
   const [currentDogIndex, setCurrentDogIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const heroDogs = allDogs.map(dog => dog.image);
 
-  const prevDog = () => setCurrentDogIndex((i) => (i === 0 ? heroDogs.length - 1 : i - 1));
-  const nextDog = () => setCurrentDogIndex((i) => (i === heroDogs.length - 1 ? 0 : i + 1));
+  const prevDog = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentDogIndex((i) => (i === 0 ? heroDogs.length - 1 : i - 1));
+    setTimeout(() => setIsAnimating(false), 300);
+  };
+
+  const nextDog = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentDogIndex((i) => (i === heroDogs.length - 1 ? 0 : i + 1));
+    setTimeout(() => setIsAnimating(false), 300);
+  };
 
   return (
     <Layout>
@@ -30,7 +43,7 @@ const Index = () => {
             </h1>
             <p className="text-lg text-primary-foreground/70 max-w-md leading-relaxed">
               [Subtext placeholder – Emotional tagline about rescuing dogs and giving them a second chance at life.]
-            </p>
+            </p> {/* TO DO */}
             <div className="flex flex-wrap gap-4">
               <Link to="/about">
                 <Button variant="hero" size="xl">About Us</Button>
@@ -45,7 +58,8 @@ const Index = () => {
             <div className="absolute -right-4 -top-4 h-[110%] w-[90%] bg-secondary/20 geometric-accent-reverse rounded" />
             <div className="absolute -left-4 -bottom-4 h-24 w-24 bg-secondary rotate-12" />
             <div className="relative z-10 w-full max-w-md">
-              <div className="aspect-square rounded-lg overflow-hidden shadow-2xl border border-border">
+              <div className="aspect-square rounded-lg overflow-hidden shadow-2xl border border-border transition-opacity duration-300" 
+                   style={{ opacity: isAnimating ? 0.7 : 1 }}>
                 <img
                   src={heroDogs[currentDogIndex]}
                   alt="Rescue dog"
@@ -54,15 +68,15 @@ const Index = () => {
               </div>
               <button
                 onClick={prevDog}
-                className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-colors shadow"
+                className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-all duration-200 shadow hover:scale-110 active:scale-95"
               >
-                <ChevronLeft className="h-5 w-5 text-foreground" />
+                <ChevronLeft className="h-5 w-5 text-foreground transition-transform duration-200" />
               </button>
               <button
                 onClick={nextDog}
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-colors shadow"
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-all duration-200 shadow hover:scale-110 active:scale-95"
               >
-                <ChevronRight className="h-5 w-5 text-foreground" />
+                <ChevronRight className="h-5 w-5 text-foreground transition-transform duration-200" />
               </button>
               {/* Dots */}
               <div className="flex justify-center gap-2 mt-4">
@@ -85,9 +99,16 @@ const Index = () => {
       {/* Mission Snapshot */}
       <section className="bg-background py-16">
         <div className="container">
-          <h2 className="font-display text-3xl text-center text-foreground mb-10">
-            [Our Mission]
-          </h2>
+          <div className="text-center mb-10">
+            <h2 className="font-display text-3xl text-foreground mb-6">
+              [Our Mission]
+            </h2> {/* TO DO */}
+            <img 
+              src={logo} 
+              alt="Sonia's Home Animal Rescue Logo" 
+              className="w-full max-w-xs h-auto mx-auto mb-12 object-contain"
+            />
+          </div>
           <div className="grid gap-6 md:grid-cols-3">
             {missionCards.map((card, i) => (
               <div
@@ -150,10 +171,10 @@ const Index = () => {
         <div className="container text-center space-y-6">
           <h2 className="font-display text-3xl md:text-4xl text-primary-foreground">
             [Call to Action Heading]
-          </h2>
+          </h2> {/* TO DO */}
           <p className="text-primary-foreground/70 max-w-lg mx-auto">
             [Placeholder supporting text for the call to action section.]
-          </p>
+          </p> {/* TO DO */}
           <Link to="/donate">
             <Button variant="heroCta" size="xl">Support Our Rescue</Button>
           </Link>

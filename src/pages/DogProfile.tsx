@@ -4,12 +4,51 @@ import { allDogs } from "@/data/dogs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const DogProfile = () => {
   const { id } = useParams();
   const dog = allDogs.find((d) => d.id === id);
   const [currentPhoto, setCurrentPhoto] = useState(0);
+  const [dogPhotos, setDogPhotos] = useState([]);
+
+  // Scroll to top when component mounts or dog changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  // Load images dynamically from dog's folder
+  useEffect(() => {
+    const loadDogPhotos = async () => {
+      if (!dog) return;
+      
+      try {
+        const imageModules = import.meta.glob("@/assets/dogs/*/*.{jpg,jpeg,png,gif,webp,svg}");
+        const photos = [];
+        
+        for (const path in imageModules) {
+          // Check if the image is in the correct dog folder
+          if (path.includes(`/dogs/${dog.id}/`)) {
+            const module = await imageModules[path]();
+            photos.push(module.default as string);
+          }
+        }
+        
+        // Sort photos alphabetically by filename for consistency
+        photos.sort((a, b) => {
+          const getFilename = (url) => url.split('/').pop().split('.')[0];
+          return getFilename(a).localeCompare(getFilename(b));
+        });
+        
+        setDogPhotos(photos.length > 0 ? photos : [dog.image]); // Fallback to main image if no photos found
+      } catch (error) {
+        console.error('Error loading dog photos:', error);
+        setDogPhotos([dog.image]); // Fallback to main image
+      }
+    };
+    
+    loadDogPhotos();
+  }, [dog]);
 
   if (!dog) {
     return (
@@ -24,8 +63,8 @@ const DogProfile = () => {
     );
   }
 
-  const prevPhoto = () => setCurrentPhoto((p) => (p === 0 ? dog.photos.length - 1 : p - 1));
-  const nextPhoto = () => setCurrentPhoto((p) => (p === dog.photos.length - 1 ? 0 : p + 1));
+  const prevPhoto = () => setCurrentPhoto((p) => (p === 0 ? dogPhotos.length - 1 : p - 1));
+  const nextPhoto = () => setCurrentPhoto((p) => (p === dogPhotos.length - 1 ? 0 : p + 1));
 
   return (
     <Layout>
@@ -106,7 +145,7 @@ const DogProfile = () => {
           <div className="relative max-w-2xl mx-auto">
             <div className="aspect-video rounded-lg overflow-hidden border border-border shadow-md">
               <img
-                src={dog.photos[currentPhoto]}
+                src={dogPhotos[currentPhoto]}
                 alt={`${dog.name} photo ${currentPhoto + 1}`}
                 className="w-full h-full object-cover"
               />
@@ -125,7 +164,7 @@ const DogProfile = () => {
             </button>
             {/* Dots */}
             <div className="flex justify-center gap-2 mt-4">
-              {dog.photos.map((_, i) => (
+              {dogPhotos.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentPhoto(i)}

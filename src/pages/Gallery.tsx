@@ -21,7 +21,7 @@ const Gallery = () => {
           <h1 className="font-display text-4xl text-primary-foreground">[Our Dogs]</h1>
           <p className="text-primary-foreground/70 max-w-lg mx-auto">
             [Intro text placeholder – Browse our lovable rescues waiting for their forever homes.]
-          </p>
+          </p> {/* TO DO */}
         </div>
       </section>
 

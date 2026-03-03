@@ -19,7 +19,7 @@ export const allDogs = [
     id: "kool",
     image: kool,
     name: "Kool",
-    age: "[Puppy]",
+    age: "[Adult]",
     description: "A sweet and playful pup.",
     category: "Puppies",
     photos: [kool, mapua, poypoy, maxx],
