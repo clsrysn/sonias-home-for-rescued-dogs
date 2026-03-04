@@ -1,7 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { getDogById } from "@/firebase/database";
-import { allDogs as staticDogs } from "@/data/dogs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
@@ -17,10 +16,8 @@ const DogProfile = () => {
         const dogData = await getDogById(id);
         setDog(dogData);
       } catch (err) {
-        // Fallback to static data if Firebase fails
-        console.warn("Firebase not configured, using static data:", err);
-        const staticDog = staticDogs.find(d => d.id === id);
-        setDog(staticDog);
+        console.error("Error fetching dog from Firebase:", err);
+        setDog(null);
       }
     };
     fetchDog();
@@ -34,7 +31,7 @@ const DogProfile = () => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  // Load images dynamically from dog's folder
+  // Load images dynamically from public folder
   useEffect(() => {
     const loadDogPhotos = async () => {
       if (!dog) return;
@@ -44,47 +41,13 @@ const DogProfile = () => {
         
         console.log('Loading photos for dog:', dog.name);
         console.log('GalleryImages field:', dog.galleryImages);
-        console.log('All dog fields:', Object.keys(dog));
         
-        // Handle both galleryImages (no space) and galleryImages (with space)
-        const galleryField = dog.galleryImages || dog['galleryImages '];
-        console.log('Gallery field found:', galleryField);
-        
-        // Use galleryImages field if available, otherwise fallback to original method
-        if (galleryField) {
-          // galleryImages is a directory name, load all images from that directory
-          const imageModules = import.meta.glob("@/assets/dogs/*/*.{jpg,jpeg,png,gif,webp,svg}");
-          console.log('All available image paths:', Object.keys(imageModules));
-          
-          for (const path in imageModules) {
-            // Check if the image is in the correct dog gallery folder
-            if (path.includes(`/dogs/${galleryField}/`)) {
-              console.log('Found image in gallery folder:', path);
-              const module = await imageModules[path]() as any;
-              photos.push(module.default as string);
-            }
-          }
-        } else {
-          // Fallback to original method
-          const imageModules = import.meta.glob("@/assets/dogs/*/*.{jpg,jpeg,png,gif,webp,svg}");
-          for (const path in imageModules) {
-            // Check if the image is in the correct dog folder
-            if (path.includes(`/dogs/${dog.id}/`)) {
-              const module = await imageModules[path]() as any;
-              photos.push(module.default as string);
-            }
-          }
-        }
+        // For now, just use the main image since we're using public URLs
+        // Gallery functionality can be added later with Firebase Storage
+        photos = [dog.image];
         
         console.log('Photos found:', photos);
-        
-        // Sort photos alphabetically by filename for consistency
-        photos.sort((a, b) => {
-          const getFilename = (url) => url.split('/').pop().split('.')[0];
-          return getFilename(a).localeCompare(getFilename(b));
-        });
-        
-        setDogPhotos(photos.length > 0 ? photos : [dog.image]); // Fallback to main image if no photos found
+        setDogPhotos(photos);
       } catch (error) {
         console.error('Error loading dog photos:', error);
         setDogPhotos([dog.image]); // Fallback to main image

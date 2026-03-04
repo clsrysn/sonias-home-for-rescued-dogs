@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Dogs collection - allow read/write
+    match /dogs/{documentId} {
+      allow read, write: if true;
+    }
+    
+    // Donations collection - allow read/write
+    match /donations/{documentId} {
+      allow read, write: if true;
+    }
+  }
+}

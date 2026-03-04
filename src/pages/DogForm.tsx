@@ -232,7 +232,7 @@ const DogForm: React.FC = () => {
                       id="image"
                       value={formData.image}
                       onChange={(e) => handleInputChange('image', e.target.value)}
-                      placeholder="e.g., src/assets/dogs/dog-name.jpg"
+                      placeholder="e.g., /dogs/dog-name.jpg"
                       required
                     />
                   </div>
@@ -260,7 +260,7 @@ const DogForm: React.FC = () => {
                         id="galleryImages"
                         value={formData.galleryImages}
                         onChange={(e) => handleInputChange('galleryImages', e.target.value)}
-                        placeholder="e.g., kool (folder name in assets/dogs/)"
+                        placeholder="e.g., kool (folder name in public/dogs/name)"
                       />
                     </div>
                   </div>
