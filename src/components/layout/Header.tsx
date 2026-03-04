@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Heart, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -19,11 +20,15 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded bg-secondary">
-            <Heart className="h-6 w-6 text-primary-deepest" fill="currentColor" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-full overflow-hidden">
+            <img 
+              src={logo} 
+              alt="Sonia's Home for Rescued Dogs" 
+              className="h-8 w-8 object-contain"
+            />
           </div>
           <span className="font-display text-xl text-primary-foreground tracking-wide">
-            SHARE
+            S.H.A.R.E.
           </span>
         </Link>
 
