@@ -34,22 +34,28 @@ const DogProfile = () => {
   // Load images dynamically from public folder
   useEffect(() => {
     const loadDogPhotos = async () => {
-      if (!dog) return;
-      
+      if (!dog || !dog.galleryImages) return;
+
       try {
-        let photos = [];
-        
-        // For now, just use the main image since we're using public URLs
-        // Gallery functionality can be added later with Firebase Storage
-        photos = [dog.image];
-        
+        const folderPath = dog.galleryImages;
+        let photos = [dog.image];
+
+        const folderUrl = `/${folderPath}`;
+        const response = await fetch(`${folderUrl}?_=${Date.now()}`);
+        const folderData = await response.json();
+
+        for (const filename of Object.keys(folderData)) {
+          const imageUrl = `/${folderPath}/${filename}`;
+          photos.push(imageUrl);
+        }
+
         setDogPhotos(photos);
       } catch (error) {
         console.error('Error loading dog photos:', error);
         setDogPhotos([dog.image]); // Fallback to main image
       }
     };
-    
+
     loadDogPhotos();
   }, [dog]);
 
