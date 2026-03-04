@@ -9,6 +9,7 @@ export interface Dog {
   description: string;
   image: string;
   adopted: boolean;
+  decreased: boolean;
   category: string;
   backgroundStory?: string;
   personality?: string;

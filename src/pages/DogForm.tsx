@@ -18,6 +18,7 @@ interface DogFormData {
   description: string;
   image: string;
   adopted: boolean;
+  decreased: boolean;
   category: string;
   backgroundStory: string;
   personality: string;
@@ -42,6 +43,7 @@ const DogForm: React.FC = () => {
     description: '',
     image: '',
     adopted: false,
+    decreased: false,
     category: 'Adults',
     backgroundStory: '',
     personality: '',
@@ -67,6 +69,7 @@ const DogForm: React.FC = () => {
           description: dog.description,
           image: dog.image,
           adopted: dog.adopted,
+          decreased: dog.decreased || false,
           category: dog.category,
           backgroundStory: dog.backgroundStory || '',
           personality: dog.personality || '',
@@ -269,6 +272,15 @@ const DogForm: React.FC = () => {
                       onCheckedChange={(checked) => handleInputChange('adopted', checked)}
                     />
                     <Label htmlFor="adopted">Adopted</Label>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Switch
+                      id="decreased"
+                      checked={formData.decreased}
+                      onCheckedChange={(checked) => handleInputChange('decreased', checked)}
+                    />
+                    <Label htmlFor="decreased">Decreased</Label>
                   </div>
                 </div>
 
