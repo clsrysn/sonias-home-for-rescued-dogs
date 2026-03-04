@@ -53,6 +53,10 @@
     --success: 149 73% 37%;
     --success-foreground: 0 0% 100%;
 
+    /* Black Decreased */
+    --decreased: 0 0% 0%;
+    --decreased-foreground: 0 0% 100%;
+
     /* Picton Blue #1EA6EC */
     --highlight: 201 85% 52%;
     --highlight-foreground: 0 0% 100%;

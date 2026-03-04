@@ -19,6 +19,7 @@ const buttonVariants = cva(
         hero: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl text-base px-8 py-3 hover:scale-105",
         heroCta: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-lg hover:shadow-xl text-base px-8 py-3 hover:scale-105 font-bold",
         adopted: "bg-success text-success-foreground hover:bg-success/90",
+        decreased: "bg-black text-white hover:bg-black/90",
       },
       size: {
         default: "h-10 px-4 py-2",

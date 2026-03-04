@@ -7,9 +7,9 @@ import poypoy from "@/assets/dogs/poypoy.jpg";
 
 const milestones = [
   { year: "2009", label: "Founded" },
-  { year: "2020", label: "100 Dogs Rescued" },
-  { year: "2023", label: "New Shelter Opened" },
-  { year: "2025", label: "500+ Adoptions" },
+  { year: "2020", label: "100 Dogs Rescued" }, // TO DO
+  { year: "2023", label: "New Shelter Opened" }, // TO DO
+  { year: "2025", label: "500+ Adoptions" }, // TO DO
 ];
 
 // const team = [

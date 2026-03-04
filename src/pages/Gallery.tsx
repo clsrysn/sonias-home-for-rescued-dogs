@@ -78,7 +78,7 @@ const Gallery = () => {
         <div className="container">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((dog) => (
-              <DogCard key={dog.id} id={dog.id} image={dog.image} name={dog.name} age={dog.age} description={dog.description} adopted={dog.adopted} />
+              <DogCard key={dog.id} id={dog.id} image={dog.image} name={dog.name} age={dog.age} description={dog.description} adopted={dog.adopted} decreased={dog.decreased} />
             ))}
           </div>
 

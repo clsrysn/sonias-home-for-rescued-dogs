@@ -9,9 +9,10 @@ interface DogCardProps {
   age: string;
   description: string;
   adopted?: boolean;
+  decreased?: boolean;
 }
 
-const DogCard = ({ id, image, name, age, description, adopted }: DogCardProps) => {
+const DogCard = ({ id, image, name, age, description, adopted, decreased }: DogCardProps) => {
   return (
     <div className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:shadow-md transition-shadow">
       <div className="relative aspect-square overflow-hidden">
@@ -20,7 +21,11 @@ const DogCard = ({ id, image, name, age, description, adopted }: DogCardProps) =
           alt={name}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        {adopted && (
+        {decreased ? (
+          <Badge className="absolute top-3 right-3 bg-black text-white border-0 font-bold">
+            Decreased
+          </Badge>
+        ) : adopted && (
           <Badge className="absolute top-3 right-3 bg-success text-success-foreground border-0 font-bold">
             Adopted
           </Badge>
@@ -34,7 +39,7 @@ const DogCard = ({ id, image, name, age, description, adopted }: DogCardProps) =
         <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
         <Link to={`/dog/${id}`}>
           <Button
-            variant={adopted ? "adopted" : "default"}
+            variant={decreased ? "decreased" : adopted ? "adopted" : "default"}
             size="sm"
             className="w-full mt-2"
           >

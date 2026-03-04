@@ -11,6 +11,7 @@ export interface Dog {
   age: string;
   description: string;
   adopted?: boolean;
+  decreased?: boolean;
   category?: string;
   background?: string;
   personality?: string;
@@ -66,6 +67,7 @@ export const allDogs: Dog[] = [
     description: "A loyal companion.",
     category: "Adults",
     adopted: false,
+    decreased: true,
     background: "Maxx is a rescue from in front of Maxx Hardware Maa branch. He was found lying in an alley, starving, and extremely thin with almost no hair. Upon rescue, he was diagnosed with a kidney problem and Mange (skin disease).",
     personality: "His energy and spirit have returned. He is grateful and lively.",
     medical: "Treated for kidney problems and Mange for 2 months. He has fully recovered, gained weight, and his hair has grown back.",
