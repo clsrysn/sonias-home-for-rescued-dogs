@@ -55,7 +55,7 @@ const Index = () => {
         <div className="container relative z-10 grid gap-8 py-16 md:grid-cols-2 md:py-24 items-center">
           <div className="space-y-6 animate-fade-in-up">
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-primary-foreground leading-tight">
-              Sonia's Home of Animal Rescue (SHARE)
+              Sonia's Home of Animal Rescue (S.H.A.R.E.)
             </h1>
             <p className="text-lg text-primary-foreground/70 max-w-md leading-relaxed">
               [Subtext placeholder – Emotional tagline about rescuing dogs and giving them a second chance at life.]
