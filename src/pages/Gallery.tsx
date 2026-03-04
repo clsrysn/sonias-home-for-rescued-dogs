@@ -2,16 +2,45 @@ import Layout from "@/components/layout/Layout";
 import DogCard from "@/components/DogCard";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { allDogs } from "@/data/dogs";
+import { useDogs } from "@/hooks/useDogs";
 
 const filters = ["All", "Puppies", "Adults", "Adopted"];
 
 const Gallery = () => {
   const [active, setActive] = useState("All");
+  const { dogs: allDogs, loading, error } = useDogs();
 
   const filtered = active === "All"
     ? allDogs
     : allDogs.filter((d) => d.category === active);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p>Loading dogs...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="text-center">
+            <p className="text-red-500">Error: {error}</p>
+            <Button onClick={() => window.location.reload()} className="mt-4">
+              Try Again
+            </Button>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

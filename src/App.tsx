@@ -9,23 +9,29 @@ import About from "./pages/About";
 import DogProfile from "./pages/DogProfile";
 import SocialMedia from "./pages/SocialMedia";
 import NotFound from "./pages/NotFound";
+import ErrorBoundary from "./components/ErrorBoundary";
+
+// Test Firebase connection
+console.log('App starting...');
 
 const App = () => (
-  <TooltipProvider>
-    <Toaster />
-    <Sonner />
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/dog/:id" element={<DogProfile />} />
-        <Route path="/donate" element={<Donate />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/updates" element={<SocialMedia />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </HashRouter>
-  </TooltipProvider>
+  <ErrorBoundary>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/dog/:id" element={<DogProfile />} />
+          <Route path="/donate" element={<Donate />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/updates" element={<SocialMedia />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </HashRouter>
+    </TooltipProvider>
+  </ErrorBoundary>
 );
 
 export default App;

@@ -16,6 +16,7 @@ export interface Dog {
   personality?: string;
   medical?: string;
   adoptionDetails?: string;
+  galleryImages?: string; // Directory path for photo gallery
 }
 
 // Single Source of Truth - Add/Update dogs here only

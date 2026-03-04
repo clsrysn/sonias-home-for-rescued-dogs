@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import { allDogs } from "@/data/dogs";
+import { getDogById } from "@/firebase/database";
+import { allDogs as staticDogs } from "@/data/dogs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
@@ -8,7 +9,23 @@ import { useState, useEffect } from "react";
 
 const DogProfile = () => {
   const { id } = useParams();
-  const dog = allDogs.find((d) => d.id === id);
+  const [dog, setDog] = useState(null);
+
+  useEffect(() => {
+    const fetchDog = async () => {
+      try {
+        const dogData = await getDogById(id);
+        setDog(dogData);
+      } catch (err) {
+        // Fallback to static data if Firebase fails
+        console.warn("Firebase not configured, using static data:", err);
+        const staticDog = staticDogs.find(d => d.id === id);
+        setDog(staticDog);
+      }
+    };
+    fetchDog();
+  }, [id]);
+
   const [currentPhoto, setCurrentPhoto] = useState(0);
   const [dogPhotos, setDogPhotos] = useState([]);
 
@@ -23,16 +40,43 @@ const DogProfile = () => {
       if (!dog) return;
       
       try {
-        const imageModules = import.meta.glob("@/assets/dogs/*/*.{jpg,jpeg,png,gif,webp,svg}");
-        const photos = [];
+        let photos = [];
         
-        for (const path in imageModules) {
-          // Check if the image is in the correct dog folder
-          if (path.includes(`/dogs/${dog.id}/`)) {
-            const module = await imageModules[path]();
-            photos.push(module.default as string);
+        console.log('Loading photos for dog:', dog.name);
+        console.log('GalleryImages field:', dog.galleryImages);
+        console.log('All dog fields:', Object.keys(dog));
+        
+        // Handle both galleryImages (no space) and galleryImages (with space)
+        const galleryField = dog.galleryImages || dog['galleryImages '];
+        console.log('Gallery field found:', galleryField);
+        
+        // Use galleryImages field if available, otherwise fallback to original method
+        if (galleryField) {
+          // galleryImages is a directory name, load all images from that directory
+          const imageModules = import.meta.glob("@/assets/dogs/*/*.{jpg,jpeg,png,gif,webp,svg}");
+          console.log('All available image paths:', Object.keys(imageModules));
+          
+          for (const path in imageModules) {
+            // Check if the image is in the correct dog gallery folder
+            if (path.includes(`/dogs/${galleryField}/`)) {
+              console.log('Found image in gallery folder:', path);
+              const module = await imageModules[path]() as any;
+              photos.push(module.default as string);
+            }
+          }
+        } else {
+          // Fallback to original method
+          const imageModules = import.meta.glob("@/assets/dogs/*/*.{jpg,jpeg,png,gif,webp,svg}");
+          for (const path in imageModules) {
+            // Check if the image is in the correct dog folder
+            if (path.includes(`/dogs/${dog.id}/`)) {
+              const module = await imageModules[path]() as any;
+              photos.push(module.default as string);
+            }
           }
         }
+        
+        console.log('Photos found:', photos);
         
         // Sort photos alphabetically by filename for consistency
         photos.sort((a, b) => {
@@ -102,7 +146,7 @@ const DogProfile = () => {
             <div>
               <h2 className="font-display text-2xl text-foreground mb-3">Background & Story</h2>
               <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                {dog.background || "Story coming soon."}
+                {dog.backgroundStory || "Story coming soon."}
               </p>
             </div>
 
@@ -118,7 +162,7 @@ const DogProfile = () => {
             <div>
               <h3 className="font-display text-xl text-foreground mb-2">Medical Information</h3>
               <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                {dog.medical || "Medical records are being updated."}
+                {dog.medicalInformation || "Medical records are being updated."}
               </p>
             </div>
 

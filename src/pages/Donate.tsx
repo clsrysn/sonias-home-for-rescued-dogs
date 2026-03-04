@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Heart, CalendarHeart, Dog, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { allDogs } from "@/data/dogs";
+import { useDogs } from "@/hooks/useDogs";
+import { addDonation } from "@/firebase/database";
 
 const donationOptions = [
   { icon: Heart, title: "[One-Time Donation]", description: "[Description placeholder for one-time donation option.]" }, // TO DO
@@ -15,12 +16,19 @@ const donationOptions = [
 const amounts = ["$10", "$25", "$50", "$100"];
 
 const Donate = () => {
+  const { dogs: allDogs } = useDogs();
   const [showGcashModal, setShowGcashModal] = useState(false);
   const [showDogGallery, setShowDogGallery] = useState(false);
   const [selectedDog, setSelectedDog] = useState(null);
   const [showDogDonationModal, setShowDogDonationModal] = useState(false);
   const [whereMoneyGoesImages, setWhereMoneyGoesImages] = useState([]);
   const [expandedImage, setExpandedImage] = useState(null);
+  const [donationForm, setDonationForm] = useState({
+    name: '',
+    email: '',
+    amount: '',
+    message: ''
+  });
 
   const handleOneTimeDonation = () => {
     setShowGcashModal(true);
@@ -56,7 +64,7 @@ const Donate = () => {
         const images = [];
         
         for (const path in imageModules) {
-          const module = await imageModules[path]();
+          const module = await imageModules[path]() as any;
           images.push({
             src: module.default as string,
             filename: path.split('/').pop().split('.')[0]

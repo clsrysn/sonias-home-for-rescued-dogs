@@ -4,7 +4,7 @@ import DogCard from "@/components/DogCard";
 import { Heart, Home as HomeIcon, Shield, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { allDogs } from "@/data/dogs";
+import { useDogs } from "@/hooks/useDogs";
 import logo from "@/assets/logo.png";
 
 const missionCards = [
@@ -14,40 +14,35 @@ const missionCards = [
 ];
 
 const Index = () => {
+  const { dogs: allDogs, loading } = useDogs();
   const [currentDogIndex, setCurrentDogIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [featuredDogs, setFeaturedDogs] = useState([]);
-  const [refreshKey, setRefreshKey] = useState(0); // Force re-render when new dogs added
+  const [heroDogs, setHeroDogs] = useState([]);
 
   // Randomly select 3 dogs for featured section
   useEffect(() => {
-    const shuffled = [...allDogs].sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, 3);
-    setFeaturedDogs(selected);
-  }, []);
+    if (allDogs.length > 0) {
+      const shuffled = [...allDogs].sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 3);
+      setFeaturedDogs(selected);
+    }
+  }, [allDogs]);
 
   // Hero section uses ALL dogs
-  const heroDogs = allDogs;
-
-  // Refresh hero dogs when component updates (for new dogs like Buddy)
   useEffect(() => {
-    // This ensures new dogs added to data appear in hero section
-  const timer = setTimeout(() => {
-      setHeroDogs([...allDogs]);
-    }, 100);
-    
-    return () => clearTimeout(timer);
+    setHeroDogs(allDogs);
   }, [allDogs]);
 
   const prevDog = () => {
-    if (isAnimating) return;
+    if (isAnimating || heroDogs.length === 0) return;
     setIsAnimating(true);
     setCurrentDogIndex((i) => (i === 0 ? heroDogs.length - 1 : i - 1));
     setTimeout(() => setIsAnimating(false), 300);
   };
 
   const nextDog = () => {
-    if (isAnimating) return;
+    if (isAnimating || heroDogs.length === 0) return;
     setIsAnimating(true);
     setCurrentDogIndex((i) => (i === heroDogs.length - 1 ? 0 : i + 1));
     setTimeout(() => setIsAnimating(false), 300);
@@ -74,46 +69,60 @@ const Index = () => {
               </Link>
             </div>
           </div>
+          {/* Hero Dog Carousel */}
           <div className="relative flex justify-center">
-            {/* Geometric yellow accent */}
-            <div className="absolute -right-4 -top-4 h-[110%] w-[90%] bg-secondary/20 geometric-accent-reverse rounded" />
-            <div className="absolute -left-4 -bottom-4 h-24 w-24 bg-secondary rotate-12" />
-            <div className="relative z-10 w-full max-w-md">
-              <div className="aspect-square rounded-lg overflow-hidden shadow-2xl border border-border transition-opacity duration-300" 
-                   style={{ opacity: isAnimating ? 0.7 : 1 }}>
-                <img
-                  src={heroDogs[currentDogIndex].image}
-                  alt={heroDogs[currentDogIndex].name}
-                  className="w-full h-full object-cover"
-                  style={{ 
-                    objectFit: 'contain',
-                    backgroundColor: '#f3f4f5'
-                  }}
-                />
-              </div>
-              <button
-                onClick={prevDog}
-                className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-all duration-200 shadow hover:scale-110 active:scale-95"
-              >
-                <ChevronLeft className="h-5 w-5 text-foreground transition-transform duration-200" />
-              </button>
-              <button
-                onClick={nextDog}
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-all duration-200 shadow hover:scale-110 active:scale-95"
-              >
-                <ChevronRight className="h-5 w-5 text-foreground transition-transform duration-200" />
-              </button>
-              {/* Dots */}
-              <div className="flex justify-center gap-2 mt-4">
-                {heroDogs.map((_, i) => (
+            {heroDogs.length > 0 ? (
+              <>
+                {/* Geometric yellow accent */}
+                <div className="absolute -right-4 -top-4 h-[110%] w-[90%] bg-secondary/20 geometric-accent-reverse rounded" />
+                <div className="absolute -left-4 -bottom-4 h-24 w-24 bg-secondary rotate-12" />
+                <div className="relative z-10 w-full max-w-md">
+                  <div className="aspect-square rounded-lg overflow-hidden shadow-2xl border border-border transition-opacity duration-300" 
+                       style={{ opacity: isAnimating ? 0.7 : 1 }}>
+                    <img
+                      src={heroDogs[currentDogIndex].image}
+                      alt={heroDogs[currentDogIndex].name}
+                      className="w-full h-full object-cover"
+                      style={{ 
+                        objectFit: 'contain',
+                        backgroundColor: '#f3f4f5'
+                      }}
+                    />
+                  </div>
                   <button
-                    key={i}
-                    onClick={() => setCurrentDogIndex(i)}
-                    className={`h-2.5 w-2.5 rounded-full transition-colors ${i === currentDogIndex ? "bg-primary" : "bg-border"}`}
-                  />
-                ))}
+                    onClick={prevDog}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-all duration-200 shadow hover:scale-110 active:scale-95"
+                  >
+                    <ChevronLeft className="h-5 w-5 text-foreground transition-transform duration-200" />
+                  </button>
+                  <button
+                    onClick={nextDog}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-all duration-200 shadow hover:scale-110 active:scale-95"
+                  >
+                    <ChevronRight className="h-5 w-5 text-foreground transition-transform duration-200" />
+                  </button>
+                  {/* Dots */}
+                  <div className="flex justify-center gap-2 mt-4">
+                    {heroDogs.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCurrentDogIndex(i)}
+                        className={`h-2.5 w-2.5 rounded-full transition-colors ${i === currentDogIndex ? "bg-primary" : "bg-border"}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="relative z-10 w-full max-w-md">
+                <div className="aspect-square rounded-lg overflow-hidden shadow-2xl border border-border flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                    <p className="text-muted-foreground">Loading dogs...</p>
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
