@@ -16,9 +16,6 @@ import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import DogForm from "./pages/DogForm";
 
-// Test Firebase connection
-console.log('App starting...');
-
 const App = () => (
   <ErrorBoundary>
     <AuthProvider>

@@ -140,7 +140,7 @@ const Index = () => {
             <img 
               src={logo} 
               alt="Sonia's Home Animal Rescue Logo" 
-              className="w-full max-w-xs h-auto mx-auto mb-12 object-contain"
+              className="w-full max-w-md h-auto mx-auto mb-12 object-contain"
             />
           </div>
           <div className="grid gap-6 md:grid-cols-3">

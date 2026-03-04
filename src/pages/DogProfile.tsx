@@ -39,14 +39,10 @@ const DogProfile = () => {
       try {
         let photos = [];
         
-        console.log('Loading photos for dog:', dog.name);
-        console.log('GalleryImages field:', dog.galleryImages);
-        
         // For now, just use the main image since we're using public URLs
         // Gallery functionality can be added later with Firebase Storage
         photos = [dog.image];
         
-        console.log('Photos found:', photos);
         setDogPhotos(photos);
       } catch (error) {
         console.error('Error loading dog photos:', error);
