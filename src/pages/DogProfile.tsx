@@ -34,25 +34,35 @@ const DogProfile = () => {
   // Load images dynamically from public folder
   useEffect(() => {
     const loadDogPhotos = async () => {
-      if (!dog || !dog.galleryImages) return;
+      if (!dog) return;
 
       try {
-        const folderPath = dog.galleryImages;
-        let photos = [dog.image];
-
-        const folderUrl = `/${folderPath}`;
-        const response = await fetch(`${folderUrl}?_=${Date.now()}`);
-        const folderData = await response.json();
-
-        for (const filename of Object.keys(folderData)) {
-          const imageUrl = `/${folderPath}/${filename}`;
-          photos.push(imageUrl);
+        let photos = [];
+        
+        // If dog has a gallery folder, load all images from it first
+        if (dog.galleryImages) {
+          // Use Vite's import.meta.glob to dynamically import all images from the dog's folder
+          const imageModules = import.meta.glob('/public/dogs/**/*.{jpg,jpeg,png,webp,gif}', { eager: true });
+          
+          // Filter images that belong to this dog's folder
+          const dogFolderPath = `/public/dogs/${dog.galleryImages}/`;
+          const dogImagePaths = Object.keys(imageModules)
+            .filter(path => path.startsWith(dogFolderPath))
+            .map(path => path.replace('/public', ''));
+          
+          photos = dogImagePaths;
         }
-
+        
+        // Only use main image if there are no images in the folder or no folder exists
+        if (photos.length === 0 && dog.image) {
+          photos.push(dog.image);
+        }
+        
         setDogPhotos(photos);
       } catch (error) {
         console.error('Error loading dog photos:', error);
-        setDogPhotos([dog.image]); // Fallback to main image
+        // Fallback to just the main image
+        setDogPhotos(dog.image ? [dog.image] : []);
       }
     };
 
@@ -101,7 +111,7 @@ const DogProfile = () => {
         <div className="container grid gap-10 md:grid-cols-2">
           {/* Main Photo */}
           <div className="rounded-lg overflow-hidden border border-border shadow-md">
-            <img src={dog.image} alt={dog.name} className="w-full aspect-square object-cover" />
+            <img src={dogPhotos[0] || dog.image} alt={dog.name} className="w-full aspect-square object-cover" />
           </div>
 
           {/* Info */}
@@ -148,42 +158,44 @@ const DogProfile = () => {
       </section>
 
       {/* Photo Carousel */}
-      <section className="bg-muted py-12">
-        <div className="container">
-          <h2 className="font-display text-2xl text-foreground text-center mb-8">Photo Gallery</h2>
-          <div className="relative max-w-2xl mx-auto">
-            <div className="aspect-video rounded-lg overflow-hidden border border-border shadow-md">
-              <img
-                src={dogPhotos[currentPhoto]}
-                alt={`${dog.name} photo ${currentPhoto + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <button
-              onClick={prevPhoto}
-              className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-colors shadow"
-            >
-              <ChevronLeft className="h-5 w-5 text-foreground" />
-            </button>
-            <button
-              onClick={nextPhoto}
-              className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-colors shadow"
-            >
-              <ChevronRight className="h-5 w-5 text-foreground" />
-            </button>
-            {/* Dots */}
-            <div className="flex justify-center gap-2 mt-4">
-              {dogPhotos.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentPhoto(i)}
-                  className={`h-2.5 w-2.5 rounded-full transition-colors ${i === currentPhoto ? "bg-primary" : "bg-border"}`}
+      {dogPhotos.length > 1 && (
+        <section className="bg-muted py-12">
+          <div className="container">
+            <h2 className="font-display text-2xl text-foreground text-center mb-8">Photo Gallery</h2>
+            <div className="relative max-w-2xl mx-auto">
+              <div className="aspect-video rounded-lg overflow-hidden border border-border shadow-md">
+                <img
+                  src={dogPhotos[currentPhoto]}
+                  alt={`${dog.name} photo ${currentPhoto + 1}`}
+                  className="w-full h-full object-cover"
                 />
-              ))}
+              </div>
+              <button
+                onClick={prevPhoto}
+                className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-colors shadow"
+              >
+                <ChevronLeft className="h-5 w-5 text-foreground" />
+              </button>
+              <button
+                onClick={nextPhoto}
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 border border-border flex items-center justify-center hover:bg-background transition-colors shadow"
+              >
+                <ChevronRight className="h-5 w-5 text-foreground" />
+              </button>
+              {/* Dots */}
+              <div className="flex justify-center gap-2 mt-4">
+                {dogPhotos.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentPhoto(i)}
+                    className={`h-2.5 w-2.5 rounded-full transition-colors ${i === currentPhoto ? "bg-primary" : "bg-border"}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </Layout>
   );
 };
