@@ -1,5 +1,5 @@
 import { db } from "./config";
-import { collection, doc, getDocs, getDoc, addDoc, updateDoc, deleteDoc, query, where, orderBy, limit } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, addDoc, updateDoc, deleteDoc, query, where, orderBy, limit, serverTimestamp, Timestamp } from "firebase/firestore";
 
 // Types for our data
 export interface Dog {
@@ -47,15 +47,15 @@ export const getDogById = async (id: string): Promise<Dog | null> => {
 export const addDog = async (dog: Omit<Dog, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> => {
   const docRef = await addDoc(dogsCollection, {
     ...dog,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp()
   });
   return docRef.id;
 };
 
 export const updateDog = async (id: string, dog: Partial<Dog>): Promise<void> => {
   const docRef = doc(db, "dogs", id);
-  await updateDoc(docRef, { ...dog, updatedAt: new Date() });
+  await updateDoc(docRef, { ...dog, updatedAt: serverTimestamp() });
 };
 
 export const deleteDog = async (id: string): Promise<void> => {
