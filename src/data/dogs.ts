@@ -73,7 +73,6 @@ export const allDogs: Dog[] = [
     medical: "Treated for kidney problems and Mange for 2 months. He has fully recovered, gained weight, and his hair has grown back.",
     adoptionDetails: "Standard adoption fee applies. Home check required."
   },
-  
   {
   id: "buddy",
   image: buddy,  // Import at top of file 
@@ -86,6 +85,5 @@ export const allDogs: Dog[] = [
   personality: "His personality traits...",
   medical: "Medical information...",
   adoptionDetails: "Adoption requirements..."
-  }
-  
+  },
 ];
