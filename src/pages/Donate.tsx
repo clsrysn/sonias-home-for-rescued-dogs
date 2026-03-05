@@ -10,7 +10,7 @@ import { addDonation } from "@/firebase/database";
 const donationOptions = [
   { icon: Heart, title: "[One-Time Donation]", description: "[Description placeholder for one-time donation option.]" }, // TO DO
   { icon: CalendarHeart, title: "[Monthly Support]", description: "[Description placeholder for recurring monthly support.]" }, // TO DO
-  { icon: Dog, title: "[Sponsor a Dog]", description: "[Description placeholder for sponsoring a specific rescue dog.]" }, // TO DO
+  { icon: Dog, title: "Sponsor a Dog", description: "[Description placeholder for sponsoring a specific rescue dog.]" }, // TO DO
 ];
 
 const amounts = ["$10", "$25", "$50", "$100"];

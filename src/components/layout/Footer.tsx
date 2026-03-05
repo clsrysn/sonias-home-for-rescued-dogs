@@ -39,7 +39,7 @@ const Footer = () => {
             <h4 className="font-display text-base mb-4 text-secondary">Contact</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
               <li>share.official0594@gmail.com</li>
-              <li>+63 939 350 5033</li>
+              <li>+63 962 911 6277</li>
               <li>Toril, Davao City</li>
             </ul>
           </div>
@@ -85,7 +85,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-10 border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/50">
-          © 2026 SHARE. All rights reserved. [Legal placeholder] {/* TO DO */}
+          © 2026 SHARE. All rights reserved. LOYOLA '25-'26.
         </div>
       </div>
     </footer>
