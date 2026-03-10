@@ -6,7 +6,7 @@ const milestones = [
   { year: "2009", label: "Founded" },
   { year: "2020", label: "100 Dogs Rescued" }, // TO DO
   { year: "2023", label: "New Shelter Opened" }, // TO DO
-  { year: "2025", label: "500+ Adoptions" }, // TO DO
+  { year: "2025", label: "3000+ Adoptions" }, 
 ];
 
 // const team = [
@@ -16,9 +16,9 @@ const milestones = [
 // ];
 
 const values = [
-  { icon: Heart, title: "[Compassion]", text: "[Value description placeholder]" }, // TO DO
-  { icon: Target, title: "[Dedication]", text: "[Value description placeholder]" }, // TO DO
-  { icon: Users, title: "[Community]", text: "[Value description placeholder]" }, // TO DO
+  { icon: Heart, title: "A 'No-Kill' Shelter", text: "Through the promotion of spaying/neuter services, we strives to ensure animals are saved, treating every life as important." },
+  { icon: Target, title: "Rehabillitation", text: "We provide a nurturing environment for abused and abandoned animals." }, 
+  { icon: Users, title: "Community", text: "We hope to serve as many stray, abandoned, and abused animals within Davao City and involve as many Dabawenyos to open their eyes to be more compassionate and empathetic to the voiceless in need. " }, 
 ];
 
 const About = () => {
@@ -44,10 +44,10 @@ const About = () => {
           <div className="space-y-4">
             <h2 className="font-display text-3xl text-foreground">Sonia's Home for Animal Rescue</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Sonia's Home for Animal Rescue (SHARE), or formerly known as Davao Animal Rescue Volunteers (DARV), was founded by Sonia Geli in 2009. The shelter began as a simple act of kindness—an act aiming to help find new homes for stray and abandoned dogs. What started as a small gesture, helping a small community, turned to a sustainable advocacy, bringing communities sharing the same values and advocacies together—united by the desire on building a safer home for stray, abandoned, and abused animals. Through years of commitment and volunteer collaboration, DARV is finally recognized as a permanent animal shelter in 2023. Located in Purok 7, Alambre, Toril, Davao City, the shelter stands 6,000-square meter lot, donated by the founder's husband. 
+              Sonia's Home for Animal Rescue (SHARE), also known as Davao Animal Rescue Volunteers (DARV), was founded by Sonia Geli in 2009. The shelter began as a simple act of kindness—an act aiming to help find new homes for stray and abandoned dogs. What started as a small gesture, helping a small community, turned to a sustainable advocacy, bringing communities sharing the same values and advocacies together—united by the desire on building a safer home for stray, abandoned, and abused animals. Through years of commitment and volunteer collaboration, DARV is finally recognized as a permanent animal shelter in 2023. Located in Purok 7, Alambre, Toril, Davao City, the shelter stands 6,000-square meter lot, donated by the founder's husband. 
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Since its founding, the DARV/SHARE has rescued and cared for over 3,000 dogs. As of 2025, 142 rescue dogs are cohabiting in the shelter. To ensure its mission and accountability, the shelter is registered with the Securities and Exchange Commission (SEC).
+              Since its founding, the DARV/SHARE has rescued and cared for over 3,000 dogs. As of 2025, 142 rescue dogs are cohabiting in the shelter. To ensure its mission and accountability, the shelter is registered with the Securities and Exchange Commission (SEC). Sonia's Home for Animal Rescue has always made its way to 
               [Story placeholder paragraph 2 – Growth, achievements, and current operations.]
             </p> {/* TO DO */}
           </div>

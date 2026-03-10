@@ -8,9 +8,9 @@ import { useDogs } from "@/hooks/useDogs";
 import logo from "@/assets/logo.png";
 
 const missionCards = [
-  { icon: Heart, title: "[Rescue]", text: "[Mission card text placeholder]" }, // TO DO
-  { icon: HomeIcon, title: "[Rehabilitate]", text: "[Mission card text placeholder]" }, // TO DO
-  { icon: Shield, title: "[Rehome]", text: "[Mission card text placeholder]" }, // TO DO
+  { icon: Heart, title: "Rescue", text: "Save animals from various difficult situations such as street injuries, neglect, and abuse." }, 
+  { icon: HomeIcon, title: "Rehabilitate", text: "Provide proper medical treatment for the rescued animals, from basic vaccinations to surgeries for severely injured animals, and carry  out comprehensive rehabilitations including physical, emotional, and psychological aspects." }, 
+  { icon: Shield, title: "Raise Awareness", text: "Raise communitu awareness about animal welfare to reduce the number of animals in distress." }, 
 ];
 
 const Index = () => {
@@ -58,8 +58,8 @@ const Index = () => {
               Sonia's Home of Animal Rescue (S.H.A.R.E.)
             </h1>
             <p className="text-lg text-primary-foreground/70 max-w-md leading-relaxed">
-              [Subtext placeholder – Emotional tagline about rescuing dogs and giving them a second chance at life.]
-            </p> {/* TO DO */}
+              A second chance for the voiceless in need.
+            </p> 
             <div className="flex flex-wrap gap-4">
               <Link to="/about">
                 <Button variant="hero" size="xl">About Us</Button>
@@ -135,8 +135,8 @@ const Index = () => {
         <div className="container">
           <div className="text-center mb-10">
             <h2 className="font-display text-3xl text-foreground mb-6">
-              [Our Mission]
-            </h2> {/* TO DO */}
+              To rescue animals coming from various difficult situations, provide necessary medical treatements from basic vaccinations to surgeries, conduct strict vetting of potential adopter to ensure animals are placed in suitable permanent homes, and raise community awareness about animal welfare to reduce the number of animals in distress.
+            </h2> 
             <img 
               src={logo} 
               alt="Sonia's Home Animal Rescue Logo" 
@@ -204,11 +204,11 @@ const Index = () => {
       <section className="bg-primary py-16">
         <div className="container text-center space-y-6">
           <h2 className="font-display text-3xl md:text-4xl text-primary-foreground">
-            [Call to Action Heading]
-          </h2> {/* TO DO */}
+            Rescue. Rehabilitate. Rehome.
+          </h2> 
           <p className="text-primary-foreground/70 max-w-lg mx-auto">
-            [Placeholder supporting text for the call to action section.]
-          </p> {/* TO DO */}
+            Amplify the voice of the voiceless. Be part of the community that creates a safer home for our companions.
+          </p> 
           <Link to="/donate">
             <Button variant="heroCta" size="xl">Support Our Rescue</Button>
           </Link>

@@ -47,7 +47,7 @@ const Gallery = () => {
       {/* Banner */}
       <section className="bg-primary-deepest py-14">
         <div className="container text-center space-y-3">
-          <h1 className="font-display text-4xl text-primary-foreground">[Our Dogs]</h1>
+          <h1 className="font-display text-4xl text-primary-foreground">Sonia's Rescued Dogs</h1>
           <p className="text-primary-foreground/70 max-w-lg mx-auto">
             [Intro text placeholder – Browse our wonderful rescues waiting for their forever homes.]
           </p> {/* TO DO */}

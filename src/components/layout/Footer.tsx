@@ -19,8 +19,8 @@ const Footer = () => {
               <span className="font-display text-lg">SHARE</span>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
-              [Mission statement placeholder – Rescuing dogs, restoring hope, one paw at a time.]
-            </p> {/* TO DO */}
+              Rescuing, providing medical care and rehabilitation, and finding loving forever homes for the voiceless in need.
+            </p> 
           </div>
 
           {/* Quick Links */}
