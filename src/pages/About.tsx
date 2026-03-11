@@ -2,12 +2,12 @@ import Layout from "@/components/layout/Layout";
 import { Heart, Target, Users } from "lucide-react";
 import rescueTeam from "@/assets/rescue-team.jpg";
 
-const milestones = [
-  { year: "2009", label: "Founded" },
-  { year: "2020", label: "100 Dogs Rescued" }, // TO DO
-  { year: "2023", label: "New Shelter Opened" }, // TO DO
-  { year: "2025", label: "3000+ Adoptions" }, 
-];
+// const milestones = [
+//   { year: "2009", label: "Founded" },
+//   { year: "2020", label: "100 Dogs Rescued" }, // TO DO
+//   { year: "2023", label: "New Shelter Opened" }, // TO DO
+//   { year: "2025", label: "3000+ Adoptions" }, 
+// ];
 
 // const team = [
 //   { image: kool, name: "[Team Member 1]", role: "[Role Placeholder]" },
@@ -47,9 +47,8 @@ const About = () => {
               Sonia's Home for Animal Rescue (SHARE), also known as Davao Animal Rescue Volunteers (DARV), was founded by Sonia Geli in 2009. The shelter began as a simple act of kindness—an act aiming to help find new homes for stray and abandoned dogs. What started as a small gesture, helping a small community, turned to a sustainable advocacy, bringing communities sharing the same values and advocacies together—united by the desire on building a safer home for stray, abandoned, and abused animals. Through years of commitment and volunteer collaboration, DARV is finally recognized as a permanent animal shelter in 2023. Located in Purok 7, Alambre, Toril, Davao City, the shelter stands 6,000-square meter lot, donated by the founder's husband. 
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Since its founding, the DARV/SHARE has rescued and cared for over 3,000 dogs. As of 2025, 142 rescue dogs are cohabiting in the shelter. To ensure its mission and accountability, the shelter is registered with the Securities and Exchange Commission (SEC). Sonia's Home for Animal Rescue has always made its way to 
-              [Story placeholder paragraph 2 – Growth, achievements, and current operations.]
-            </p> {/* TO DO */}
+              Since its founding, the DARV/SHARE has rescued and cared for over 3,000 dogs. As of 2025, 142 rescue dogs are cohabiting in the shelter. To ensure its mission and accountability, the shelter is registered with the Securities and Exchange Commission (SEC). From 2009, Sonia's Home for Animal Rescue has made its way from providing temporary homes to animals in distress, to advocating the movement at a large audience at the present moment. What started as small acts of kindness became a campaign for a bigger issue that still prevails today. 
+            </p> 
           </div>
         </div>
       </section>
@@ -79,7 +78,7 @@ const About = () => {
       {/* Values */}
       <section className="bg-primary-deepest py-16">
         <div className="container">
-          <h2 className="font-display text-3xl text-center text-primary-foreground mb-10">[Vision & Values]</h2>
+          <h2 className="font-display text-3xl text-center text-primary-foreground mb-10">Vision & Values</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {values.map((v, i) => (
               <div key={i} className="rounded-lg bg-primary p-6 text-center space-y-3">

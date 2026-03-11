@@ -86,10 +86,10 @@ const Donate = () => {
       {/* Hero */}
       <section className="bg-primary-deepest py-14">
         <div className="container text-center space-y-3">
-          <h1 className="font-display text-4xl text-primary-foreground">Make a Difference</h1>
+          <h1 className="font-display text-4xl text-primary-foreground">Support Our Cause</h1>
           <p className="text-primary-foreground/70 max-w-lg mx-auto">
-            Your support helps us rescue, rehabilitate, and rehome dogs in need.
-          </p> {/* TO DO */}
+            Support SHARE's campaign on rescuing, rehabilitating, and providing animals proper home through monetary and food donations. Your help is highly appreciated!
+          </p> 
         </div>
       </section>
 
@@ -152,7 +152,7 @@ const Donate = () => {
       {/* Where Your Money Goes Gallery */}
       <section className="bg-background py-16">
         <div className="container text-center">
-          <h2 className="font-display text-3xl text-foreground mb-10">[Where Your Money Goes]</h2>
+          <h2 className="font-display text-3xl text-foreground mb-10">Where Your Support Goes</h2>
           <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-5">
             {whereMoneyGoesImages.map((img, i) => (
               <div key={i} className="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer" onClick={() => handleImageClick(img)}>
