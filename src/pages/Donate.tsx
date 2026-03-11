@@ -214,7 +214,7 @@ const Donate = () => {
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm font-medium">Account Number:</p>
-                  <p className="text-lg font-bold text-primary">1234-5678-90</p>
+                  <p className="text-lg font-bold text-primary">2149 679068</p>
                 </div>
                 <p className="text-xs text-muted-foreground">Scan QR code for direct bank transfer</p>
               </div>
