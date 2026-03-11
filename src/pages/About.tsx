@@ -17,8 +17,8 @@ import rescueTeam from "@/assets/rescue-team.jpg";
 
 const values = [
   { icon: Heart, title: "A 'No-Kill' Shelter", text: "Through the promotion of spaying/neuter services, we strives to ensure animals are saved, treating every life as important." },
-  { icon: Target, title: "Rehabillitation", text: "We provide a nurturing environment for abused and abandoned animals." }, 
-  { icon: Users, title: "Community", text: "We hope to serve as many stray, abandoned, and abused animals within Davao City and involve as many Dabawenyos to open their eyes to be more compassionate and empathetic to the voiceless in need. " }, 
+  { icon: Target, title: "Rehabillitation", text: "We provide a nurturing environment for abused and abandoned animals." },
+  { icon: Users, title: "Community", text: "We hope to serve as many stray, abandoned, and abused animals within Davao City and involve as many Dabawenyos to open their eyes to be more compassionate and empathetic to the voiceless in need. " },
 ];
 
 const About = () => {
@@ -44,21 +44,20 @@ const About = () => {
           <div className="space-y-4">
             <h2 className="font-display text-3xl text-foreground">Sonia's Home for Animal Rescue</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Sonia's Home for Animal Rescue (SHARE), also known as Davao Animal Rescue Volunteers (DARV), was founded by Sonia Geli in 2009. The shelter began as a simple act of kindness—an act aiming to help find new homes for stray and abandoned dogs. What started as a small gesture, helping a small community, turned to a sustainable advocacy, bringing communities sharing the same values and advocacies together—united by the desire on building a safer home for stray, abandoned, and abused animals. Through years of commitment and volunteer collaboration, DARV is finally recognized as a permanent animal shelter in 2023. Located in Purok 7, Alambre, Toril, Davao City, the shelter stands 6,000-square meter lot, donated by the founder's husband. 
+              Sonia's Home for Animal Rescue (SHARE), also known as Davao Animal Rescue Volunteers (DARV), was founded by Sonia Geli in 2009. The shelter began as a simple act of kindness—an act aiming to help find new homes for stray and abandoned dogs. What started as a small gesture, helping a small community, turned to a sustainable advocacy, bringing communities sharing the same values and advocacies together—united by the desire on building a safer home for stray, abandoned, and abused animals. Through years of commitment and volunteer collaboration, DARV is finally recognized as a permanent animal shelter in 2023. Located in Purok 7, Alambre, Toril, Davao City, the shelter stands 6,000-square meter lot, donated by the founder's husband.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Since its founding, the DARV/SHARE has rescued and cared for over 3,000 dogs. As of 2025, 142 rescue dogs are cohabiting in the shelter. To ensure its mission and accountability, the shelter is registered with the Securities and Exchange Commission (SEC). From 2009, Sonia's Home for Animal Rescue has made its way from providing temporary homes to animals in distress, to advocating the movement at a large audience at the present moment. What started as small acts of kindness became a campaign for a bigger issue that still prevails today. 
-            </p> 
+              Since its founding, the DARV/SHARE has rescued and cared for over 3,000 dogs. As of 2025, 142 rescue dogs are cohabiting in the shelter. To ensure its mission and accountability, the shelter is registered with the Securities and Exchange Commission (SEC). From 2009, Sonia's Home for Animal Rescue has made its way from providing temporary homes to animals in distress, to advocating the movement at a large audience at the present moment. What started as small acts of kindness became a campaign for a bigger issue that still prevails today.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Timeline
       <section className="bg-muted py-16">
         <div className="container">
           <h2 className="font-display text-3xl text-center text-foreground mb-10">SHARE's Journey]</h2>
           <div className="relative">
-            {/* Line */}
             <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-primary/20 -translate-y-1/2" />
             <div className="grid gap-6 md:grid-cols-4">
               {milestones.map((m, i) => (
@@ -73,7 +72,7 @@ const About = () => {
             </div>
           </div>
         </div>
-      </section>  
+      </section>   */}
 
       {/* Values */}
       <section className="bg-primary-deepest py-16">
