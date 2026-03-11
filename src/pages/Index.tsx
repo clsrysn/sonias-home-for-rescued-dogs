@@ -134,14 +134,15 @@ const Index = () => {
       <section className="bg-background py-16">
         <div className="container">
           <div className="text-center mb-10">
-            <h2 className="font-display text-3xl text-foreground mb-6">
-              To rescue animals coming from various difficult situations, provide necessary medical treatements from basic vaccinations to surgeries, conduct strict vetting of potential adopter to ensure animals are placed in suitable permanent homes, and raise community awareness about animal welfare to reduce the number of animals in distress.
-            </h2> 
+
             <img 
               src={logo} 
               alt="Sonia's Home Animal Rescue Logo" 
               className="w-full max-w-md h-auto mx-auto mb-12 object-contain"
             />
+            <h2 className="font-display text-3xl text-foreground mb-6">
+              To rescue animals coming from various difficult situations, provide necessary medical treatements from basic vaccinations to surgeries, conduct strict vetting of potential adopter to ensure animals are placed in suitable permanent homes, and raise community awareness about animal welfare to reduce the number of animals in distress.
+            </h2> 
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {missionCards.map((card, i) => (

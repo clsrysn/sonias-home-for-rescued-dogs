@@ -2,22 +2,21 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Heart, CalendarHeart, Dog, X } from "lucide-react";
+import { Heart, Dog, X, Smartphone, CreditCard } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useDogs } from "@/hooks/useDogs";
 import { addDonation } from "@/firebase/database";
 
 const donationOptions = [
-  { icon: Heart, title: "Monetary Support (BPI)", description: "[Description placeholder for one-time donation option.]" }, // TO DO
-  { icon: Heart, title: "Monetary Support (GCASH)", description: "[Description placeholder for recurring monthly support.]" }, // TO DO
-  { icon: Dog, title: "Food Support", description: "[Description placeholder for sponsoring a specific rescue dog.]" }, // TO DO
+  { icon: Heart, title: "One-Time Donation", description: "Make a single donation to support our rescue dogs." },
+  { icon: Dog, title: "Sponsor a Dog", description: "Sponsor a specific rescue dog with monthly support." }
 ];
 
 const amounts = ["$10", "$25", "$50", "$100"];
 
 const Donate = () => {
   const { dogs: allDogs } = useDogs();
-  const [showGcashModal, setShowGcashModal] = useState(false);
+  const [showDonationModal, setShowDonationModal] = useState(false);
   const [showDogGallery, setShowDogGallery] = useState(false);
   const [selectedDog, setSelectedDog] = useState(null);
   const [showDogDonationModal, setShowDogDonationModal] = useState(false);
@@ -31,11 +30,7 @@ const Donate = () => {
   });
 
   const handleOneTimeDonation = () => {
-    setShowGcashModal(true);
-  };
-
-  const handleMonthlySupport = () => {
-    setShowGcashModal(true);
+    setShowDonationModal(true);
   };
 
   const handleSponsorDog = () => {
@@ -103,7 +98,7 @@ const Donate = () => {
       {/* Donation Options */}
       <section className="bg-background py-16">
         <div className="container">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 max-w-2xl mx-auto">
             {donationOptions.map((opt, i) => (
               <div key={i} className="rounded-lg border border-border bg-card p-6 text-center space-y-4 shadow-sm hover:shadow-md transition-shadow border-t-4 border-t-secondary">
                 <opt.icon className="h-12 w-12 text-primary mx-auto" />
@@ -112,7 +107,7 @@ const Donate = () => {
                 <Button 
                   variant="cta" 
                   className="w-full"
-                  onClick={i === 0 ? handleOneTimeDonation : i === 1 ? handleMonthlySupport : handleSponsorDog}
+                  onClick={i === 0 ? handleOneTimeDonation : handleSponsorDog}
                 >
                   Choose
                 </Button>
@@ -173,29 +168,61 @@ const Donate = () => {
       </section>
     </Layout>
 
-    {/* GCash Modal */}
-    {showGcashModal && (
+    {/* Donation Modal */}
+    {showDonationModal && (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-lg max-w-md w-full p-6 space-y-4">
+        <div className="bg-white rounded-lg max-w-2xl w-full p-6 space-y-6">
           <div className="flex justify-between items-center">
-            <h3 className="font-display text-xl text-foreground">Donate via GCash</h3>
+            <h3 className="font-display text-2xl text-foreground">Choose Payment Method</h3>
             <Button 
               variant="ghost" 
               size="sm" 
-              onClick={() => setShowGcashModal(false)}
+              onClick={() => setShowDonationModal(false)}
             >
               <X className="h-4 w-4" />
             </Button>
           </div>
-          <div className="space-y-4 text-center">
-            <div className="w-32 h-32 mx-auto bg-gray-200 rounded-lg flex items-center justify-center">
-              <span className="text-gray-500">QR Code</span>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* GCash Option */}
+            <div className="border border-border rounded-lg p-6 space-y-4">
+              <div className="flex items-center space-x-3">
+                <Smartphone className="h-6 w-6 text-primary" />
+                <h4 className="font-semibold text-lg">GCash</h4>
+              </div>
+              <div className="space-y-3 text-center">
+                <div className="w-24 h-24 mx-auto bg-gray-200 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500 text-sm">GCash QR</span>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">Phone Number:</p>
+                  <p className="text-lg font-bold text-primary">+63 917 887 6808</p>
+                </div>
+                <p className="text-xs text-muted-foreground">Scan QR code or send to this number</p>
+              </div>
             </div>
-            <div className="space-y-2">
-              <p className="font-semibold">Phone Number:</p>
-              <p className="text-lg text-primary">+63 917 887 6808</p>
+            
+            {/* BPI Option */}
+            <div className="border border-border rounded-lg p-6 space-y-4">
+              <div className="flex items-center space-x-3">
+                <CreditCard className="h-6 w-6 text-primary" />
+                <h4 className="font-semibold text-lg">BPI</h4>
+              </div>
+              <div className="space-y-3 text-center">
+                <div className="w-24 h-24 mx-auto bg-gray-200 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500 text-sm">BPI QR</span>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">Account Number:</p>
+                  <p className="text-lg font-bold text-primary">1234-5678-90</p>
+                </div>
+                <p className="text-xs text-muted-foreground">Scan QR code for direct bank transfer</p>
+              </div>
             </div>
-            <p className="text-sm text-muted-foreground">Scan the QR code or send payment to the number above</p>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground">Thank you for your generous donation!</p>
           </div>
         </div>
       </div>
@@ -242,9 +269,9 @@ const Donate = () => {
     {/* Dog Donation Modal */}
     {showDogDonationModal && selectedDog && (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-lg max-w-md w-full p-6 space-y-4">
+        <div className="bg-white rounded-lg max-w-2xl w-full p-6 space-y-6">
           <div className="flex justify-between items-center">
-            <h3 className="font-display text-xl text-foreground">Donate to {selectedDog.name}</h3>
+            <h3 className="font-display text-2xl text-foreground">Sponsor {selectedDog.name}</h3>
             <Button 
               variant="ghost" 
               size="sm" 
@@ -253,22 +280,60 @@ const Donate = () => {
               <X className="h-4 w-4" />
             </Button>
           </div>
+          
           <div className="space-y-4">
             <img 
               src={selectedDog.image} 
               alt={selectedDog.name}
-              className="w-full h-32 object-cover rounded-lg"
+              className="w-full h-128 object-cover rounded-lg"
             />
-            <div className="space-y-2 text-center">
-              <div className="w-32 h-32 mx-auto bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500">QR Code Placeholder</span>
-              </div>
-              <div className="space-y-2">
-                <p className="font-semibold">Phone Number:</p>
-                <p className="text-lg text-primary">+63 912 345 6789</p>
-              </div>
-              <p className="text-sm text-muted-foreground">Your donation will help {selectedDog.name} get the care they need</p>
+            <div className="text-center">
+              <h4 className="font-semibold text-lg">{selectedDog.name}</h4>
+              <p className="text-sm text-muted-foreground">{selectedDog.age}</p>
+              <p className="text-sm text-muted-foreground mt-1">{selectedDog.description}</p>
             </div>
+          </div>
+          f
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* GCash Option */}
+            <div className="border border-border rounded-lg p-6 space-y-4">
+              <div className="flex items-center space-x-3">
+                <Smartphone className="h-6 w-6 text-primary" />
+                <h4 className="font-semibold text-lg">GCash</h4>
+              </div>
+              <div className="space-y-3 text-center">
+                <div className="w-24 h-24 mx-auto bg-gray-200 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500 text-sm">GCash QR</span>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">Phone Number:</p>
+                  <p className="text-lg font-bold text-primary">+63 917 887 6808</p>
+                </div>
+                <p className="text-xs text-muted-foreground">Scan QR code or send to this number</p>
+              </div>
+            </div>
+            
+            {/* BPI Option */}
+            <div className="border border-border rounded-lg p-6 space-y-4">
+              <div className="flex items-center space-x-3">
+                <CreditCard className="h-6 w-6 text-primary" />
+                <h4 className="font-semibold text-lg">BPI</h4>
+              </div>
+              <div className="space-y-3 text-center">
+                <div className="w-24 h-24 mx-auto bg-gray-200 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500 text-sm">BPI QR</span>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">Account Number:</p>
+                  <p className="text-lg font-bold text-primary">1234-5678-90</p>
+                </div>
+                <p className="text-xs text-muted-foreground">Scan QR code for direct bank transfer</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground">Your sponsorship will help {selectedDog.name} get the care they need!</p>
           </div>
         </div>
       </div>
